@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chanica Chen – Album</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kranky&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Merriweather', serif; margin:0; background:#fff; color:#111; line-height:1.8; }
+    header { font-family:'Kranky', cursive; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; border-bottom:1px solid #eee; }
+    .site-title { font-size:26px; font-weight:400; text-decoration:none; color:#111; font-family:'Kranky', cursive; }
+    nav a { margin-left:20px; text-decoration:none; font-family:'Kranky', cursive; font-size:20px; color:#888; transition:color .2s; }
+    nav a:hover, nav a.active { color:#111; }
+    .gallery-intro { padding:80px 60px 20px; max-width:1200px; margin:auto; font-family:'Inter', sans-serif; }
+    .gallery-intro h1 { font-size:28px; margin-bottom:16px; color:#333; }
+    .filters { text-align:center; margin-top:16px; }
+    .filters button { margin:0 8px; padding:6px 12px; border:1px solid #ccc; background:none; font-family:'Inter', sans-serif; font-size:14px; cursor:pointer; border-radius:4px; transition:background .2s, color .2s; }
+    .filters button.active, .filters button:hover { background:#111; color:#fff; border-color:#111; }
+    .gallery { column-width:280px; column-gap:40px; padding:0 60px 60px; max-width:1200px; margin:auto; }
+    .gallery-item { break-inside:avoid; margin-bottom:40px; }
+    .gallery-item img { width:100%; height:auto; border-radius:8px; display:block; }
+    .load-more { display:block; margin:30px auto; padding:10px 20px; background:#333; color:#fff; border:none; border-radius:4px; cursor:pointer; font-family:'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="site-title" href="index.html">Chanica Chen</a>
+    <nav>
+      <a href="index.html">Work</a>
+      <a href="album.html">Album</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <section class="gallery-intro">
+    <h1>Discover more of my photography</h1>
+    <div class="filters">
+      <button data-cat="all" class="active">All</button>
+      <button data-cat="Portrait">Portrait</button>
+      <button data-cat="Foshan">Foshan</button>
+      <button data-cat="Chengdu">Chengdu</button>
+      <button data-cat="Sydney">Sydney</button>
+      <button data-cat="United State">United State</button>
+      <button data-cat="Melbourne">Melbourne</button>
+      <button data-cat="Chongqing">Chongqing</button>
+      <button data-cat="Meow">Meow</button>
+      <button data-cat="More">More</button>
+    </div>
+  </section>
+  <section class="gallery" id="gallery"></section>
+  <button class="load-more" id="loadMore">Load More</button>
+  <footer style="text-align:center; padding:20px 0; color:#888; font-size:14px;">© 2025 Chanica Chen. All rights reserved.</footer>
+  <script>
+    const photos = [
+      // Portrait
+      { src: 'images/portrait/p1.jpg', category: 'Portrait', showInAll: true },
+      { src: 'images/portrait/p2.jpg', category: 'Portrait', showInAll: true },
+      { src: 'images/portrait/p3.jpg', category: 'Portrait', showInAll: false },
+      { src: 'images/portrait/p4.jpg', category: 'Portrait', showInAll: false },
+      { src: 'images/portrait/p5.jpg', category: 'Portrait', showInAll: false },
+      { src: 'images/portrait/p6.jpg', category: 'Portrait', showInAll: false },
+      // Chengdu
+      { src: 'images/chengdu/cd1.jpg', category: 'Chengdu', showInAll: true },
+      { src: 'images/chengdu/cd2.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd3.jpg', category: 'Chengdu', showInAll: true },
+      { src: 'images/chengdu/cd4.jpg', category: 'Chengdu', showInAll: true },
+      { src: 'images/chengdu/cd5.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd6.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd7.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd8.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd9.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd10.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd11.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd12.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd13.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd14.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd15.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd16.jpg', category: 'Chengdu', showInAll: false },
+      { src: 'images/chengdu/cd17.jpg', category: 'Chengdu', showInAll: false },
+      // Foshan
+      { src: 'images/foshan/fs1.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs2.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs3.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs4.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs5.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs6.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs7.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs8.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs9.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs10.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs11.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs12.jpg', category: 'Foshan', showInAll: false },
+      { src: 'images/foshan/fs13.jpg', category: 'Foshan', showInAll: false },
+      // Melbourne
+      { src: 'images/melbourne/mel1.jpg', category: 'Melbourne', showInAll: false },
+      { src: 'images/melbourne/mel2.jpg', category: 'Melbourne', showInAll: false },
+      { src: 'images/melbourne/mel3.jpg', category: 'Melbourne', showInAll: false },
+      { src: 'images/melbourne/mel4.jpg', category: 'Melbourne', showInAll: false },
+      { src: 'images/melbourne/mel5.jpg', category: 'Melbourne', showInAll: false },
+      { src: 'images/melbourne/mel6.jpg', category: 'Melbourne', showInAll: false },
+      { src: 'images/melbourne/mel7.jpg', category: 'Melbourne', showInAll: false },
+      // Sydney
+      { src: 'images/sydney/syd1.jpg', category: 'Sydney', showInAll: true },
+      { src: 'images/sydney/syd2.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd3.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd4.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd5.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd6.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd7.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd8.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd9.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd10.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd11.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd12.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd13.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd14.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd15.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd16.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd17.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd18.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd19.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd20.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd21.jpg', category: 'Sydney', showInAll: false },
+      { src: 'images/sydney/syd22.jpg', category: 'Sydney', showInAll: false },
+      // United State
+      { src: 'images/usa/usa1.jpg', category: 'United State', showInAll: true },
+      { src: 'images/usa/usa2.jpg', category: 'United State', showInAll: true },
+      { src: 'images/usa/usa3.jpg', category: 'United State', showInAll: true },
+      { src: 'images/usa/usa4.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa5.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa6.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa7.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa8.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa9.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa10.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa11.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa12.jpg', category: 'United State', showInAll: false },
+      { src: 'images/usa/usa13.jpg', category: 'United State', showInAll: false },
+      // Chongqing
+      { src: 'images/chongqing/cq1.jpg', category: 'Chongqing', showInAll: false },
+      { src: 'images/chongqing/cq2.jpg', category: 'Chongqing', showInAll: false },
+      { src: 'images/chongqing/cq3.jpg', category: 'Chongqing', showInAll: false },
+      { src: 'images/chongqing/cq4.jpg', category: 'Chongqing', showInAll: false },
+      { src: 'images/chongqing/cq5.jpg', category: 'Chongqing', showInAll: false },
+      { src: 'images/chongqing/cq6.jpg', category: 'Chongqing', showInAll: false },
+      // Meow
+      { src: 'images/meow/meow1.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow2.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow3.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow4.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow5.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow6.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow7.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow8.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow9.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow10.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow11.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow12.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow13.jpg', category: 'Meow', showInAll: false },
+      { src: 'images/meow/meow14.jpg', category: 'Meow', showInAll: false },
+      // More
+      { src: 'images/more/more1.jpg', category: 'More', showInAll: false },
+      { src: 'images/more/more2.jpg', category: 'More', showInAll: false }
+    ];
+    const perPage = 9;
+    let currentPage = 0;
+    let currentCat = 'all';
+    const galleryEl = document.getElementById('gallery');
+    const loadMoreBtn = document.getElementById('loadMore');
+    const filterBtns = document.querySelectorAll('.filters button');
+    function renderPhotos(reset = false) {
+      if (reset) { galleryEl.innerHTML = ''; currentPage = 0; }
+      const filtered = photos.filter(p => currentCat === 'all' ? p.showInAll : p.category === currentCat);
+      const slice = filtered.slice(currentPage * perPage, (currentPage + 1) * perPage);
+      slice.forEach(p => {
+        const item = document.createElement('div'); item.className='gallery-item';
+        const img = document.createElement('img'); img.src=p.src; img.alt=p.category;
+        item.appendChild(img); galleryEl.appendChild(item);
+      });
+      currentPage++;
+      loadMoreBtn.style.display = currentPage* perPage >= filtered.length ? 'none':'block';
+    }
+    filterBtns.forEach(btn => btn.addEventListener('click', () => { filterBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentCat=btn.dataset.cat; renderPhotos(true); }));
+    loadMoreBtn.addEventListener('click', ()=>renderPhotos());
+    renderPhotos(true);
+  </script>
+</body>
+</html>
