@@ -1,0 +1,244 @@
+/* Chanica Chen — Private Portfolio Gate
+   Designed to match the existing portfolio:
+   white background, Kranky headings/nav, Inter UI, blue links. */
+
+html.access-locked,
+html.access-locked body {
+  min-height: 100%;
+  overflow: hidden;
+}
+
+html.access-locked body > *:not(#portfolio-access-gate) {
+  visibility: hidden !important;
+}
+
+#portfolio-access-gate,
+#portfolio-access-gate * {
+  box-sizing: border-box;
+}
+
+#portfolio-access-gate {
+  visibility: visible !important;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  overflow-y: auto;
+  background: #fff;
+  color: #111;
+  opacity: 1;
+  transition: opacity 220ms ease;
+}
+
+#portfolio-access-gate.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Match the site's existing header */
+.access-header {
+  font-family: 'Kranky', cursive;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  border-bottom: 1px solid #eee;
+}
+
+.access-site-title {
+  margin: 0;
+  font-family: 'Kranky', cursive;
+  font-size: 26px;
+  font-weight: 400;
+  color: #111;
+}
+
+.access-header-note {
+  margin: 0;
+  font-family: 'Kranky', cursive;
+  font-size: 20px;
+  color: #888;
+}
+
+/* Same content width/padding rhythm as the original homepage intro */
+.access-main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 60px 40px;
+  font-family: 'Inter', sans-serif;
+}
+
+.access-main h1 {
+  margin: 0 0 16px;
+  font-family: 'Kranky', cursive;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.access-intro {
+  max-width: 650px;
+  margin: 0;
+  color: #444;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.access-form {
+  margin-top: 42px;
+  max-width: 520px;
+}
+
+.access-label {
+  display: block;
+  margin-bottom: 12px;
+  color: #444;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+}
+
+.access-pin-row {
+  display: flex;
+  gap: 10px;
+}
+
+.access-pin {
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #111;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.access-pin:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.08);
+}
+
+.access-submit {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #0070f3;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.access-submit:hover {
+  text-decoration: underline;
+}
+
+.access-error {
+  min-height: 24px;
+  margin: 12px 0 0;
+  color: #b42318;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.access-pin-row.is-error {
+  animation: access-shake 260ms ease;
+}
+
+@keyframes access-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
+
+.access-contact {
+  max-width: 650px;
+  margin-top: 70px;
+  padding-top: 32px;
+  border-top: 1px solid #eee;
+}
+
+.access-contact h2 {
+  margin: 0 0 10px;
+  color: #333;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.access-contact p {
+  margin: 0 0 12px;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.access-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.access-links a {
+  color: #0070f3;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.access-links a:hover {
+  text-decoration: underline;
+}
+
+.access-footer {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 40px 20px;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .access-header {
+    padding: 18px 20px;
+  }
+
+  .access-site-title {
+    font-size: 23px;
+  }
+
+  .access-header-note {
+    font-size: 17px;
+  }
+
+  .access-main {
+    padding: 58px 20px 30px;
+  }
+
+  .access-pin {
+    width: 54px;
+    height: 54px;
+  }
+
+  .access-contact {
+    margin-top: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #portfolio-access-gate {
+    transition: none;
+  }
+
+  .access-pin-row.is-error {
+    animation: none;
+  }
+}
